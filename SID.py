@@ -1,5 +1,5 @@
 """
-Main script for Simply Deltas
+Main script for Simple Deltas
 """
 
 import sys
@@ -24,39 +24,57 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-def main():
-    """
-    Main GUI function to run
-    """
-    input_layout = [
+def select_excel():
+    layout = [
         [
             sg.Text(
-                "Enter experiment compare file.",
+                "Select Experiment Compare file to show delta summary.",
                 font=("Arial", 11),
             )
         ],
         [
             sg.Text("File location: ", size=(10, 1), font=("Arial", 11)),
             sg.Input(key="-FILE-"),
-            sg.FileBrowse("Browse"),
+            sg.FileBrowse("Browse", file_types=(("Excel Files", "*.xlsx;*.xlsm"),)),
         ],
-        [sg.Submit()],
+        [sg.Submit(), sg.Button("Cancel")],
     ]
 
-    window = sg.Window("Data Input", input_layout, auto_size_text=True)
-    window.set_icon(resource_path("icons/book.ico"))
+    window = sg.Window(
+        "Data Input",
+        layout,
+        auto_size_text=True,
+        icon=resource_path("icons/compare.ico"),
+    )
+    window.set_icon(resource_path("icons/compare.ico"))
+    file_path = None
+
     while True:
         event, values = window.read()
-        if event == sg.WIN_CLOSED:
-            window.close()
-            sys.exit()
-        elif event == "Submit":
-            file_location = values["-FILE-"]
-            window.close()
+        if event == "Submit":
+            file_path = values["-FILE-"]
+            if not file_path:
+                sg.popup(
+                    "No file selected. Please rerun Simple Deltas.",
+                    title="Info",
+                    icon=resource_path("icons/compare.ico"),
+                )
+                break
+            break
+        elif event in (sg.WIN_CLOSED, "Cancel"):
             break
 
-    compare = ExcelCompare(file_location)
-    compare.run()
+    window.close()
+    return file_path
+
+
+def main():
+    file_path = select_excel()
+    if file_path:
+        compare = ExcelCompare(file_path)
+        compare.run(file_path)
+    else:
+        return
 
 
 if __name__ == "__main__":
