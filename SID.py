@@ -73,6 +73,14 @@ def main():
     if file_path:
         compare = ExcelCompare(file_path)
         compare.run(file_path)
+
+        sg.popup_timed(
+            "Deltas generated in Outlook message.",
+            title="Finished",
+            auto_close_duration=8,
+            keep_on_top=True,
+            icon=resource_path("icons/compare.ico"),
+        )
     else:
         return
 
