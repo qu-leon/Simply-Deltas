@@ -81,8 +81,8 @@ class ExcelCompare:
                 html_body += f"""
                 <tr>
                     <td>{row}</td>
-                    <td>{d_val if d_val is not None else ''}{''}{e_val}</td>
-                    <td>{t_val if t_val is not None else ''}{''}{u_val}</td>
+                    <td>{d_val if d_val is not None else ''}{' '}{e_val if e_val is not None else ''}</td>
+                    <td>{t_val if t_val is not None else ''}{' '}{u_val if u_val is not None else ''}</td>
                 </tr>
                 """
             html_body += """
