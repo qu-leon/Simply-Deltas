@@ -28,7 +28,7 @@ def select_excel():
     layout = [
         [
             sg.Text(
-                "Select Experiment Compare file to show delta summary.",
+                "Select the Experiment Compare Excel file(s).",
                 font=("Arial", 11),
             )
         ],
@@ -41,7 +41,7 @@ def select_excel():
     ]
 
     window = sg.Window(
-        "Data Input",
+        "Simple Deltas",
         layout,
         auto_size_text=True,
         icon=resource_path("icons/compare.ico"),

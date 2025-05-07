@@ -41,9 +41,36 @@ class ExcelCompare:
             t_val = ws[f"T{row}"].value
             e_val = ws[f"E{row}"].value
             u_val = ws[f"U{row}"].value
+            f_val = ws[f"F{row}"].value
+            g_val = ws[f"G{row}"].value
+            h_val = ws[f"H{row}"].value
+            i_val = ws[f"I{row}"].value
+            k_val = ws[f"K{row}"].value
+            v_val = ws[f"V{row}"].value
+            w_val = ws[f"W{row}"].value
+            x_val = ws[f"X{row}"].value
+            y_val = ws[f"Y{row}"].value
+            aa_val = ws[f"AA{row}"].value
 
             if d_val != t_val:
-                differences.append((row, d_val, e_val, t_val, u_val))
+                differences.append(
+                    (
+                        d_val,
+                        e_val,
+                        f_val,
+                        g_val,
+                        h_val,
+                        i_val,
+                        k_val,
+                        t_val,
+                        u_val,
+                        v_val,
+                        w_val,
+                        x_val,
+                        y_val,
+                        aa_val,
+                    )
+                )
 
         return differences, dlp1, dlp2
 
@@ -72,17 +99,50 @@ class ExcelCompare:
             <p>The following deltas were found between <b>{dlp1}</b> and <b>{dlp2}</b>:</p>
             <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; font-family: Arial; font-size: 12px;">
                 <tr style="background-color: #f2f2f2;">
-                    <th>Row</th>
-                    <th>{dlp1}</th>
-                    <th>{dlp2}</th>
+                    <th>OPER</th>
+                    <th>INST</th>
+                    <th>MER</th>
+                    <th>SPL</th>
+                    <th>SIF</th>
+                    <th>SIF Value</th>
+                    <th>OPER</th>
+                    <th>INST</th>
+                    <th>MER</th>
+                    <th>SPL</th>
+                    <th>SIF</th>
+                    <th>SIF Value</th>
                 </tr>
             """
-            for row, d_val, e_val, t_val, u_val in differences:
+            for (
+                d_val,
+                e_val,
+                f_val,
+                g_val,
+                h_val,
+                i_val,
+                k_val,
+                t_val,
+                u_val,
+                v_val,
+                w_val,
+                x_val,
+                y_val,
+                aa_val,
+            ) in differences:
                 html_body += f"""
                 <tr>
-                    <td>{row}</td>
                     <td>{d_val if d_val is not None else ''}{' '}{e_val if e_val is not None else ''}</td>
+                    <td>{f_val if f_val is not None else ''}</td>
+                    <td>{g_val if g_val is not None else ''}</td>
+                    <td>{h_val if h_val is not None else ''}</td>
+                    <td>{i_val if i_val is not None else ''}</td>
+                    <td>{k_val if k_val is not None else ''}</td>
                     <td>{t_val if t_val is not None else ''}{' '}{u_val if u_val is not None else ''}</td>
+                    <td>{v_val if v_val is not None else ''}</td>
+                    <td>{w_val if w_val is not None else ''}</td>
+                    <td>{x_val if x_val is not None else ''}</td>
+                    <td>{y_val if y_val is not None else ''}</td>
+                    <td>{aa_val if aa_val is not None else ''}</td>
                 </tr>
                 """
             html_body += """
