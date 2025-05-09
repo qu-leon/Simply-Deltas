@@ -45,12 +45,10 @@ class ExcelCompare:
             g_val = ws[f"G{row}"].value
             h_val = ws[f"H{row}"].value
             i_val = ws[f"I{row}"].value
-            k_val = ws[f"K{row}"].value
             v_val = ws[f"V{row}"].value
             w_val = ws[f"W{row}"].value
             x_val = ws[f"X{row}"].value
             y_val = ws[f"Y{row}"].value
-            aa_val = ws[f"AA{row}"].value
 
             if d_val != t_val:
                 differences.append(
@@ -61,14 +59,12 @@ class ExcelCompare:
                         g_val,
                         h_val,
                         i_val,
-                        k_val,
                         t_val,
                         u_val,
                         v_val,
                         w_val,
                         x_val,
                         y_val,
-                        aa_val,
                     )
                 )
 
@@ -104,13 +100,11 @@ class ExcelCompare:
                     <th>MER</th>
                     <th>SPL</th>
                     <th>SIF</th>
-                    <th>SIF Value</th>
                     <th>OPER</th>
                     <th>INST</th>
                     <th>MER</th>
                     <th>SPL</th>
                     <th>SIF</th>
-                    <th>SIF Value</th>
                 </tr>
             """
             for (
@@ -120,14 +114,12 @@ class ExcelCompare:
                 g_val,
                 h_val,
                 i_val,
-                k_val,
                 t_val,
                 u_val,
                 v_val,
                 w_val,
                 x_val,
                 y_val,
-                aa_val,
             ) in differences:
                 html_body += f"""
                 <tr>
@@ -136,13 +128,11 @@ class ExcelCompare:
                     <td>{g_val if g_val is not None else ''}</td>
                     <td>{h_val if h_val is not None else ''}</td>
                     <td>{i_val if i_val is not None else ''}</td>
-                    <td>{k_val if k_val is not None else ''}</td>
                     <td>{t_val if t_val is not None else ''}{' '}{u_val if u_val is not None else ''}</td>
                     <td>{v_val if v_val is not None else ''}</td>
                     <td>{w_val if w_val is not None else ''}</td>
                     <td>{x_val if x_val is not None else ''}</td>
                     <td>{y_val if y_val is not None else ''}</td>
-                    <td>{aa_val if aa_val is not None else ''}</td>
                 </tr>
                 """
             html_body += """
